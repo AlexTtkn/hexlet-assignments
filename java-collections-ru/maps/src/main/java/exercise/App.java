@@ -12,11 +12,9 @@ public class App {
         if (sentence.isEmpty()) return map;
         String[] splitter = sentence.split(" ");
         for (String word : splitter) {
-            if (map.containsKey(word)) {
-                map.put(word, map.get(word) + 1);
-            } else {
-                map.put(word, 1);
-            }
+            int count = map.getOrDefault(word, 0);
+            count += 1;
+            map.put(word, count);
         }
         return map;
     }
