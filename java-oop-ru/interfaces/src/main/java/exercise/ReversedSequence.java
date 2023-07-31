@@ -6,7 +6,7 @@ public class ReversedSequence implements CharSequence {
 
     public ReversedSequence(String str) {
         StringBuilder reverse = new StringBuilder(str).reverse();
-        this.str = reverse.toString();
+        this.str = String.valueOf(reverse);
     }
 
     @Override
