@@ -21,22 +21,23 @@ public final class App {
         });
 
         // BEGIN
-        app.get("/companies{id}", ctx -> {
+        app.get("/companies/{id}", ctx -> {
             var id = ctx.pathParam("id");
 
-            var compID = "nothing";
+            var companyId = "doesn't exist";
             Map<String, String> companyMap = new HashMap<>();
 
             for (Map<String, String> company : COMPANIES) {
                 if (company.get("id").equals(id)) {
-                    compID = id;
+                    companyId = id;
                     companyMap = company;
                 }
             }
-            if (!compID.equals("nothing")) {
+
+            if (!companyId.equals("doesn't exist")) {
                 ctx.json(companyMap);
             } else {
-                throw new NotFoundResponse("not found");
+                throw new NotFoundResponse("Company not found");
             }
         });
         // END
