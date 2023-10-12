@@ -1,6 +1,7 @@
 <!-- BEGIN -->
 @import gg.jte.Content
 @param Content content
+@param Content footer = null
 
 <!doctype html>
 <html lang="en">
@@ -13,7 +14,7 @@
 <div>
     <p>
         <a href="/">Main</a>
-        <a href="/">Users</a>
+        <a href="/users">Users</a>
     </p>
 </div>
     ${footer}
