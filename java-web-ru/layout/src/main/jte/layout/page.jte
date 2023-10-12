@@ -16,8 +16,8 @@
         <a href="/">Users</a>
     </p>
 </div>
-    ${heder}
     ${footer}
+    ${content}
 </body>
 </html>
 <!-- END -->
