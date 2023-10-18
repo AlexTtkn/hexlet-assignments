@@ -14,6 +14,9 @@ import java.util.Collections;
 import exercise.repository.ArticleRepository;
 
 public final class App {
+    private static final String TITLE_LENGTH = "Название не должно быть короче двух символов";
+    private static final String ALREADY_EXISTS = "Статья с таким названием уже существует";
+    private static final String CONTENT_LENGTH = "Статья должна быть не короче 10 символов";
 
     public static Javalin getApp() {
 
@@ -32,7 +35,7 @@ public final class App {
         });
 
         // BEGIN
-        app.get("/articles/new", ctx -> {
+        app.get("articles/new", ctx -> {
             var page = new NewArticlePage();
             ctx.render("articles/build.jte", Collections.singletonMap("page", page));
         });
@@ -40,12 +43,12 @@ public final class App {
         app.post("/articles", ctx -> {
             try {
                 var title = ctx.formParamAsClass("title", String.class)
-                        .check(value -> value.length() > 1, "Название не должно быть короче двух символов")
-                        .check(value -> ArticleRepository.findByTitle(value) == null, "Статья с таким названием уже существует")
+                        .check(value -> value.length() >= 2, "Название не должно быть короче двух символов")
+                        .check(value -> !ArticleRepository.existsByTitle(value), "Статья с таким названием уже существует")
                         .get();
 
                 var content = ctx.formParamAsClass("content", String.class)
-                        .check(value -> value.length() > 9, "Статья должна быть не короче 10 символов")
+                        .check(value -> value.length() >= 10, "Статья должна быть не короче 10 символов")
                         .get();
 
                 var article = new Article(title, content);
@@ -53,13 +56,10 @@ public final class App {
                 ctx.redirect("/articles");
 
             } catch (ValidationException e) {
-                ctx.status(422);
-
                 var title = ctx.formParam("title");
-                var context = ctx.formParam("context");
-
-                var page = new NewArticlePage(title, context, e.getErrors());
-                ctx.render("articles/build.jte", Collections.singletonMap("page", page));
+                var content = ctx.formParam("content");
+                var page = new NewArticlePage(title, content, e.getErrors());
+                ctx.render("articles/build.jte", Collections.singletonMap("page", page)).status(422);
             }
         });
         // END
