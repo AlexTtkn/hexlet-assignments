@@ -2,7 +2,6 @@ package exercise;
 
 import io.javalin.Javalin;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -20,22 +19,10 @@ public final class App {
         app.get("/users", ctx -> {
             var page = ctx.queryParamAsClass("page", Integer.class).getOrDefault(1);
             var per = ctx.queryParamAsClass("per", Integer.class).getOrDefault(5);
-
-            List<Map<String, String>> map = new ArrayList<>();
             var first = (page - 1) * per;
-            var last = first + (per - 1);
-
-            if (last > USERS.size()) {
-                last = USERS.size();
-            }
-
-            for (int i = first; i <= last; i++) {
-                map.add(USERS.get(i));
-            }
-            ctx.json(map);
+            List<Map<String, String>> result = USERS.subList(first, first+ per);
+            ctx.json(result);
         });
-
-
         // END
 
         return app;
