@@ -25,20 +25,16 @@ public final class App {
         // BEGIN
         app.get("/users/{id}", ctx -> {
             var id = ctx.pathParam("id");
-
             User thisUser = USERS.stream()
                     .filter(user -> String.valueOf(user.getId()).equals(id))
                     .findFirst()
                     .orElse(null);
-
             if (thisUser == null) {
-                throw new NotFoundResponse("User not found. Try another ID");
+                throw new NotFoundResponse("User not found");
             }
-
             var userPage = new UserPage(thisUser);
             ctx.render("users/show.jte", Collections.singletonMap("userPage", userPage));
         });
-
         app.get("/users", ctx -> {
             var usersPage = new UsersPage(USERS);
             ctx.render("users/index.jte", Collections.singletonMap("usersPage", usersPage));

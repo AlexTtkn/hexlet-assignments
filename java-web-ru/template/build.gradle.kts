@@ -23,7 +23,7 @@ dependencies {
     implementation("io.javalin:javalin:5.6.1")
 
     // BEGIN
-    implementation("gg.jte:jte:3.0.1")
+    implementation("gg.jte:jte:3.1.4")
     implementation("io.javalin:javalin-rendering:5.6.2")
     // END
 
