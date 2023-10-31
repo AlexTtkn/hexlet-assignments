@@ -1,4 +1,3 @@
-<!-- BEGIN -->
 @import gg.jte.Content
 @param Content content
 @param Content footer = null
@@ -8,12 +7,12 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>Hexlet Courses</title>
+    <title>Hexlet Users</title>
 </head>
 <body>
 <div>
     <p>
-        <a href="/">Main</a>
+        <a href="/">Home</a>
         <a href="/users">Users</a>
     </p>
 </div>
@@ -21,4 +20,3 @@
     ${content}
 </body>
 </html>
-<!-- END -->

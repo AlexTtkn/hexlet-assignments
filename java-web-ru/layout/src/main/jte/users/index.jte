@@ -1,17 +1,30 @@
-<!-- BEGIN -->
 @import exercise.dto.users.UsersPage
 @param UsersPage page
 
+
 @template.layout.page(
 content = @`
-    @for(var user: page.getUsers())
-        <h1>${user.getId()}. ${user.getFirstName()} ${user.getLastName()}</h1>
-        <p>E-mail: ${user.getEmail()}</p>
-    @endfor
+    <h1>List of users</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        @for(var user : page.getUsers())
+            <tr>
+                <td>${user.getId()}</td>
+                <td>${user.getFirstName()} ${user.getLastName()}</td>
+                <td>${user.getEmail()}</td>
+            </tr>
+        @endfor
+        </tbody>
+    </table>
 `,
 footer = @`
-    <p>Thanks for visiting, come again soon!</p>
+    <p>Thanks for visiting our website!</p>
 `
 )
-<!-- END -->
-
