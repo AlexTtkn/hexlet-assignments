@@ -1,8 +1,6 @@
-<!-- BEGIN -->
 @import exercise.dto.users.UsersPage
 @param UsersPage page
 
-<!doctype html>
 <html lang="en">
 <head>
     <title>Users</title>
@@ -12,10 +10,23 @@
     <input type="search" name="term" value="${page.getTerm()}"/>
     <input type="submit" value="Search"/>
 </form>
-@for(var user: page.getUsers())
-    <h1>${user.getFirstName()} ${user.getLastName()}</h1>
-    <p>${user.getEmail()}</p>
-@endfor
+    <table class="table table-bordered border-dark">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        @for(var user : page.getUsers())
+            <tr>
+                <td>${user.getId()}</td>
+                <td>${user.getFirstName()} ${user.getLastName()}</td>
+                <td>${user.getEmail()}</td>
+            </tr>
+        @endfor
+        </tbody>
+    </table>
 </body>
 </html>
-<!-- END -->
