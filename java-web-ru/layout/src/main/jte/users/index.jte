@@ -5,7 +5,7 @@
 @template.layout.page(
 content = @`
     <h1>List of users</h1>
-    <table>
+    <table class="table table-bordered border-dark">
         <thead>
         <tr>
             <th>ID</th>
