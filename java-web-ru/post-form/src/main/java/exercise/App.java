@@ -41,7 +41,6 @@ public final class App {
             var user = new User(firstName, lastName, email, passwordSec);
             UserRepository.save(user);
             ctx.redirect("/users");
-
         });
         // END
 
@@ -50,6 +49,6 @@ public final class App {
 
     public static void main(String[] args) {
         Javalin app = getApp();
-        app.start(7070);
+        app.start(8080);
     }
 }

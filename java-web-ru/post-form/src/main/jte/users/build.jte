@@ -1,35 +1,33 @@
-<!-- BEGIN -->
 <form action="/users" method="post">
     <div>
         <label>
             First name
-            <input type="text" name="firstName" />
+            <input type="text" name="firstName">
         </label>
     </div>
     <div>
         <label>
             Last name
-            <input type="text" name="lastName" />
+            <input type="text" name="lastName">
         </label>
     </div>
     <div>
         <label>
             Email
-            <input type="email" required name="email" />
+            <input type="text" required name="email">
         </label>
     </div>
     <div>
         <label>
             Password
-            <input type="password" required name="password" />
+            <input type="text" required name="password">
         </label>
     </div>
     <div>
         <label>
-            Confirm password
-            <input type="password" required name="passwordConfirmation" />
+            Password confirmation
+            <input type="text" required name="passwordConfirmation">
         </label>
     </div>
-    <input type="submit" value="Done" />
+    <input type="submit" name="Register">
 </form>
-<!-- END -->
