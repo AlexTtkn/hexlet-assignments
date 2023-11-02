@@ -14,9 +14,6 @@ import java.util.Collections;
 import exercise.repository.ArticleRepository;
 
 public final class App {
-    private static final String TITLE_LENGTH = "Название не должно быть короче двух символов";
-    private static final String ALREADY_EXISTS = "Статья с таким названием уже существует";
-    private static final String CONTENT_LENGTH = "Статья должна быть не короче 10 символов";
 
     public static Javalin getApp() {
 
@@ -43,18 +40,18 @@ public final class App {
         app.post("/articles", ctx -> {
             try {
                 var title = ctx.formParamAsClass("title", String.class)
-                        .check(value -> value.length() >= 2, "Название не должно быть короче двух символов")
-                        .check(value -> !ArticleRepository.existsByTitle(value), "Статья с таким названием уже существует")
+                        .check(v -> !ArticleRepository.existsByTitle(v),
+                                "Статья с таким названием уже существует")
+                        .check(v -> v.length() >= 2,
+                                "Название не должно быть короче двух символов")
                         .get();
-
                 var content = ctx.formParamAsClass("content", String.class)
-                        .check(value -> value.length() >= 10, "Статья должна быть не короче 10 символов")
+                        .check(v -> v.length() >= 10,
+                                "Статья должна быть не короче 10 символов")
                         .get();
-
-                var article = new Article(title, content);
-                ArticleRepository.save(article);
+                var page = new Article(title, content);
+                ArticleRepository.save(page);
                 ctx.redirect("/articles");
-
             } catch (ValidationException e) {
                 var title = ctx.formParam("title");
                 var content = ctx.formParam("content");
@@ -69,6 +66,6 @@ public final class App {
 
     public static void main(String[] args) {
         Javalin app = getApp();
-        app.start(7070);
+        app.start(8080);
     }
 }
