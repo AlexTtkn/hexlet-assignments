@@ -1,13 +1,14 @@
 @import exercise.dto.posts.PostsPage
 @import exercise.util.NamedRoutes
-@param PostsPage postsPage
+@param PostsPage postPage
 
 @template.layout.page(
 content = @`
-    @for(var post: postsPage.getPosts())
-        <a href="${NamedRoutes.postPath(post.getId())}">${post.getName()}</a>
+    @for(var post: postPage.getPosts())
+        <a href="${NamedRoutes.postPath(post.getId())}">${post.getName()} <br> </a>
     @endfor
-    <a href="${NamedRoutes.postsPath()}?page=${postsPage.getPage() - 1}">Previous page</a>
-    <a href="${NamedRoutes.postsPath()}?page=${postsPage.getPage() + 1}">Next page</a>
+    <a href="${NamedRoutes.postsPath()}?page=${postPage.getPage() - 1}">Previous page</a>
+    <a href="${NamedRoutes.postsPath()}?page=${postPage.getPage() + 1}">Next page</a>
+
 `
 )

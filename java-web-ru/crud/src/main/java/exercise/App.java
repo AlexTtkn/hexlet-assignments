@@ -16,8 +16,8 @@ public final class App {
         app.get(NamedRoutes.rootPath(), RootController::index);
 
         // BEGIN
-        app.get(NamedRoutes.postPath("{id}"), PostsController::showPost);
         app.get(NamedRoutes.postsPath(), PostsController::showAllPosts);
+        app.get(NamedRoutes.postPath("{id}"), PostsController::showPost);
         // END
 
         return app;
@@ -25,6 +25,6 @@ public final class App {
 
     public static void main(String[] args) {
         Javalin app = getApp();
-        app.start(7070);
+        app.start(8080);
     }
 }
