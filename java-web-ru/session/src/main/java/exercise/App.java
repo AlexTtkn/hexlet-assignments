@@ -14,10 +14,10 @@ public final class App {
         });
 
         // BEGIN
-        app.get(NamedRoutes.rootPath(), SessionsController::getMainPage);
+        app.get(NamedRoutes.rootPath(), SessionsController::index);
         app.get(NamedRoutes.buildSessionPath(), SessionsController::build);
-        app.post(NamedRoutes.loginPath(), SessionsController::login);
-        app.post(NamedRoutes.logoutPath(), SessionsController::logout);
+        app.post(NamedRoutes.loginPath(), SessionsController::create);
+        app.post(NamedRoutes.logoutPath(), SessionsController::destroy);
         // END
 
         return app;
@@ -25,6 +25,6 @@ public final class App {
 
     public static void main(String[] args) {
         Javalin app = getApp();
-        app.start(7070);
+        app.start(8080);
     }
 }
