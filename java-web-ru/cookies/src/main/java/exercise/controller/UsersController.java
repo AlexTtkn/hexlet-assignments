@@ -1,17 +1,13 @@
 package exercise.controller;
 
-
+import org.apache.commons.lang3.StringUtils;
 import exercise.util.Security;
 import exercise.model.User;
 import exercise.util.NamedRoutes;
 import java.util.Collections;
-
-
 import exercise.repository.UserRepository;
-
-import io.javalin.http.Context;
 import io.javalin.http.NotFoundResponse;
-import org.apache.commons.lang3.StringUtils;
+import io.javalin.http.Context;
 
 
 public class UsersController {
@@ -21,22 +17,22 @@ public class UsersController {
     }
 
     // BEGIN
-    public static void create(Context ctx) throws Exception {
+    public static void create(Context ctx)  {
         var firstName = StringUtils.capitalize(ctx.formParam("firstName"));
         var lastName = StringUtils.capitalize(ctx.formParam("lastName"));
-        var email = ctx.formParam("email").trim().toLowerCase();
+        var email = ctx.formParam("email").toLowerCase().trim();
         var password = ctx.formParam("password");
-        var encryptedPassword = Security.encrypt(password);
+        var passwordConfirmation = ctx.formParam("passwordConfirmation");
+        var passwordSec = Security.encrypt(password);
         var token = Security.generateToken();
 
-        var user = new User(firstName, lastName, email, encryptedPassword, token);
+        var user = new User(firstName, lastName, email, passwordSec, token);
         UserRepository.save(user);
 
         ctx.cookie("token", token);
         ctx.redirect(NamedRoutes.userPath(user.getId()));
     }
-
-    public static void show(Context ctx) throws Exception {
+    public static void show(Context ctx) {
         var id = ctx.pathParamAsClass("id", Long.class).get();
         var token = ctx.cookie("token") == null ? null : ctx.cookie("token");
         var user = UserRepository.find(id)
