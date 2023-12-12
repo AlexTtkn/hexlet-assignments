@@ -53,7 +53,7 @@ public class Application {
         return ResponseEntity.created(location).body(post);
     }
 
-    @PutMapping("/posts/{id} ")
+    @PutMapping("/posts/{id}")
     public ResponseEntity<Post> update(@PathVariable String id, @RequestBody Post data) {
         var mbPost = posts.stream()
                 .filter(p -> p.getId().equals(id))
