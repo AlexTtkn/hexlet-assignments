@@ -59,15 +59,15 @@ public class Application {
         var mbPost = posts.stream()
                 .filter(p -> p.getId().equals(id))
                 .findFirst();
-        var status = HttpStatus.NO_CONTENT;
+
         if (mbPost.isPresent()) {
             var post = mbPost.get();
             post.setId(data.getId());
             post.setTitle(data.getTitle());
             post.setBody(data.getBody());
-            status = HttpStatus.OK;
+            return ResponseEntity.ok(post);
         }
-        return ResponseEntity.status(status).body(data);
+        return ResponseEntity.noContent().build();
 
     }
     // END
